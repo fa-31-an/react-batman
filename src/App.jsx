@@ -1,10 +1,13 @@
+import MainLayout from "./Layout";
+import AppRoutes from "./routes";
+
 function App() {
 
   return (
-    <>
-      <h1>App</h1>
-    </>
-  )
-}
+    <MainLayout>
+      <AppRoutes />
+    </MainLayout>
+  );
+};
 
-export default App
+export default App;
