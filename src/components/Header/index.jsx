@@ -1,6 +1,6 @@
 import styles from './Header.module.css'
 
-export default function Header () {
+export const Header = () => {
   return (
     <>
       <header className={`py-5 ${styles.header}`}>

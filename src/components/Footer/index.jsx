@@ -1,6 +1,6 @@
 import styles from './Footer.module.css'
 
-export default function Footer () {
+export const Footer = () => {
   return (
     <>
       <footer className={`py-5 ${styles.footer}`}>
