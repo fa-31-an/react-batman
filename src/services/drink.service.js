@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const GET_RECIPE_SERVICE = async (drinkId) => {
+const getRecipesService = async (drinkId) => {
   try {
     const URL = `${API_URL}lookup.php?i=${drinkId}`;
     const { data } = await axios.get(URL);
@@ -13,7 +13,7 @@ const GET_RECIPE_SERVICE = async (drinkId) => {
   };
 };
 
-const FILTER_DRINKS_SERVICE = async (name, category) => {
+const filterDrinksService = async (name, category) => {
   try {
     const URL = `${API_URL}.filter.php?i=${name}&c=${category}`;
     const { data } = await axios.get(URL);
@@ -25,6 +25,6 @@ const FILTER_DRINKS_SERVICE = async (name, category) => {
 };
 
 export {
-  GET_RECIPE_SERVICE,
-  FILTER_DRINKS_SERVICE,
+  getRecipesService,
+  filterDrinksService,
 };

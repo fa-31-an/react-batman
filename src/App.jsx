@@ -1,15 +1,18 @@
 import MainLayout from "./Layout";
-import { CategoriesProvider } from "./context/CategoriesProvider";
+import {CategoriesProvider} from "./context/CategoriesProvider";
+import DrinksProvider from "./context/DrinksProvider";
 import AppRoutes from "./routes";
 
 function App() {
 
   return (
-    <CategoriesProvider>
     <MainLayout>
-      <AppRoutes />
+      <DrinksProvider>
+        <CategoriesProvider>
+          <AppRoutes />
+        </CategoriesProvider>
+      </DrinksProvider>
     </MainLayout>
-    </CategoriesProvider>
   );
 };
 

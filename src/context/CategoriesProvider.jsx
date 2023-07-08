@@ -1,23 +1,23 @@
 import { useState, useEffect, createContext, } from 'react';
 import PropTypes from 'prop-types';
-import { GET_CATEGORIES_SERVICE } from '../services/categories.service';
+import { getCategoriesSevice } from '../services/categories.service';
 
 const CategoriesContext = createContext();
 
 const CategoriesProvider = ({children}) => {
   const [ categories, setCategories ] = useState([]);
   
-  const GET_CATEGORIES = async () => {
+  const getCategories = async () => {
     try {
-      const CATEGORIES_DATA = await GET_CATEGORIES_SERVICE();
-      setCategories(CATEGORIES_DATA);
+      const categoriesData = await getCategoriesSevice();
+      setCategories(categoriesData);
     } catch (error) {
       console.error(error);
     }
   };
   
     useEffect(() => {
-      GET_CATEGORIES();
+      getCategories();
     }, []);
 
   return(
@@ -31,6 +31,6 @@ CategoriesProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { CategoriesProvider };
+export { CategoriesProvider, CategoriesContext };
 
-export default CategoriesContext;
+// export default CategoriesContext;

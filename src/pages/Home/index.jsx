@@ -1,7 +1,13 @@
+import SearchForm from "../../components/SearchForm";
+import DrinksList from "../../components/DrinksList";
+import DrinkDetailModal from "../../components/DrinkDetailModal";
+
 export default function Home () {
   return (
-    <>
-      <h1>La app eventualmente irá acá</h1>
-    </>
+    <div>
+      <SearchForm />
+      <DrinksList />
+      <DrinkDetailModal />
+    </div>
   );
 };

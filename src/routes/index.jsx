@@ -4,13 +4,11 @@ import NotFound from "../pages/NotFound";
 
 export default function AppRoutes () {
   return (
-    <>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </>
   );
 };

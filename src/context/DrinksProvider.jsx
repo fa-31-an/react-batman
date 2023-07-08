@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, } from 'react';
-import PropTypes, { func } from 'prop-types';
-import { FILTER_DRINKS_SERVICE, GET_RECIPE_SERVICE, } from '../services/drink.service';
+import PropTypes from 'prop-types';
+import { filterDrinksService, getRecipesService, } from '../services/drink.service';
 
 const DrinksContext = createContext();
 
@@ -23,7 +23,7 @@ const DrinksProvider = ({ children }) => {
     if (!drinkId) return;
     try {
       setLoading(true);
-      const recipeData = await GET_RECIPE_SERVICE(drinkId);
+      const recipeData = await getRecipesService(drinkId);
       setRecipe(recipeData);
     } catch (error) {
       console.error(error);
@@ -35,7 +35,7 @@ const DrinksProvider = ({ children }) => {
   async function getDrink (data) {
     try {
       setLoading(true);
-      const drinksData = await FILTER_DRINKS_SERVICE(data.name, data.category);
+      const drinksData = await filterDrinksService(data.name, data.category);
       setDrinks(drinksData);
     } catch (error) {
       console.error(error);
@@ -69,4 +69,6 @@ DrinksProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { DrinksContext, DrinksProvider };
+export default { DrinksProvider, DrinksContext };
+
+// export default DrinksProvider;
