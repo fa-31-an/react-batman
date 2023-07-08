@@ -69,10 +69,13 @@ export default function SearchForm() {
                   >
                     <option disabled>-Seleccione una categoría-</option>
                     {
+                      // console.log(categories)
                       categories.map((cat) => {
+                        return (
                         <option key={cat.strCategory} value={cat.strCategory} >
                           {cat.strCategory}
                         </option>
+                        )
                       })
                     }
                   </Field>
