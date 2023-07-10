@@ -18,9 +18,7 @@ export default function SearchForm() {
     category: Yup.string().required("Seleccione una categoría"),
   });
 
-  function handleSubmit(values) {
-    getDrink(values);
-  };
+  const handleSubmit = (val => getDrink(val));
 
   return (
     <Formik
@@ -30,7 +28,7 @@ export default function SearchForm() {
     >
 
       {
-        (formik) => {
+        (formik) => (
           <Form onSubmit={formik.handleSubmit} >
             {
               formik.status && (
@@ -100,7 +98,7 @@ export default function SearchForm() {
             </Row>
 
           </Form>
-        }
+        )
       }
 
     </Formik>
