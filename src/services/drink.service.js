@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const getRecipesService = async (drinkId) => {
+export const getRecipesService = async (drinkId) => {
   try {
-    const URL = `${API_URL}lookup.php?i=${drinkId}`;
-    const { data } = await axios.get(URL);
+    const url = `${apiUrl}lookup.php?i=${drinkId}`;
+    const { data } = await axios.get(url);
     return data.drinks[0] ?? [];
   } catch (error) {
     console.error(error);
@@ -13,10 +13,10 @@ const getRecipesService = async (drinkId) => {
   };
 };
 
-const filterDrinksService = async (name, category) => {
+export const filterDrinksService = async (name, category) => {
   try {
-    const URL = `${API_URL}.filter.php?i=${name}&c=${category}`;
-    const { data } = await axios.get(URL);
+    const url = `${apiUrl}filter.php?i=${name}&c=${category}`;
+    const { data } = await axios.get(url);
     return data.drinks;
   } catch (error) {
     console.error(error);
@@ -24,7 +24,7 @@ const filterDrinksService = async (name, category) => {
   };
 };
 
-export {
-  getRecipesService,
-  filterDrinksService,
-};
+// export {
+//   getRecipesService,
+//   filterDrinksService,
+// };

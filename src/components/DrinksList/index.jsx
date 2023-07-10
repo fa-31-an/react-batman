@@ -16,7 +16,9 @@ export default function DrinksList() {
       <Row className="mt-5">
         {
           drinks.map((drink) => {
-            <DrinkCard key={drink.idDrink} drink={drink} />
+            return(
+              <DrinkCard key={drink.idDrink} drink={drink} />
+            );
           })
         }
       </Row>

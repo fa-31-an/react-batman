@@ -1,33 +1,51 @@
-import { Col, Card, Button, } from 'react-bootstrap';
-import useDrinks from '../../hooks/useDrinks';
+import { Col, Card, Button, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import useDrinks from '../../hooks/useDrinks';
+import useCart from '../../hooks/useCart';
 
 
 export default function DrinkCard({ drink }) {
   const { handleModalClick, handleDrinkIdClick } = useDrinks();
+  const { addToCart } = useCart();
+
+  function handleAddToCart(drink) {
+    addToCart(drink);
+  }
 
   return (
     <Col md={6} lg={3} >
       <Card className="mb-4">
         <Card.Img
           variant="top"
-          source={drink.strDrinkThumb}
+          src={drink.strDrinkThumb}
           alt={`Imagen de ${drink.strDrink}`}
         />
         <Card.Body>
-          <Card.Title>
-            {drink.strDrink}
-          </Card.Title>
-          <Button
-            variant="warning"
-            className="w-100 text-uppercase mt-2"
-            onClick={
-              () => {
-                handleModalClick();
-                handleDrinkIdClick(drink.idDrink);
-              }
-            }
-          >Ver receta</Button>
+          <Card.Title>{drink.strDrink}</Card.Title>
+          <Card.Subtitle>{drink.price}</Card.Subtitle>
+          <Row>
+            <Col >
+              <Button
+                variant="warning"
+                className="text-uppercase"
+                onClick={() => {
+                  handleModalClick();
+                  handleDrinkIdClick(drink.idDrink);
+                }}
+              >
+                Ver Receta
+              </Button>
+            </Col>
+            <Col >
+              <Button
+                variant="primary"
+                className="text-uppercase"
+                onClick={() => handleAddToCart(drink)}
+              >
+                Agregar al carrito
+              </Button>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </Col>
@@ -39,5 +57,6 @@ DrinkCard.propTypes = {
     strDrinkThumb: PropTypes.string.isRequired,
     strDrink: PropTypes.string.isRequired,
     idDrink: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
 };
