@@ -65,7 +65,7 @@ export default function SearchForm() {
                     as={Form.Select}
                     placeholder='Seleccioname una categoría'
                   >
-                    <option disabled>-Seleccione una categoría-</option>
+                    <option>-Seleccione una categoría-</option>
                     {
                       // console.log(categories)
                       categories.map((cat) => {
