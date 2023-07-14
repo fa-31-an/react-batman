@@ -2,20 +2,23 @@ import MainLayout from "./Layout";
 import { CartProvider } from "./context/CartProvider";
 import { CategoriesProvider } from "./context/CategoriesProvider";
 import { DrinksProvider } from "./context/DrinksProvider";
+import { ModalProvider } from "./context/ModalProvider";
 import AppRoutes from "./routes";
 
 function App() {
 
   return (
-    <MainLayout>
-      <DrinksProvider>
-        <CategoriesProvider>
-          <CartProvider>
-          <AppRoutes />
-          </CartProvider>
-        </CategoriesProvider>
-      </DrinksProvider>
-    </MainLayout>
+    <ModalProvider>
+      <CartProvider>
+        <MainLayout>
+          <DrinksProvider>
+            <CategoriesProvider>
+              <AppRoutes />
+            </CategoriesProvider>
+          </DrinksProvider>
+        </MainLayout>
+      </CartProvider>
+    </ModalProvider>
   );
 };
 

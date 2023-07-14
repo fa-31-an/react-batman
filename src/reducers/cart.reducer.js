@@ -4,7 +4,7 @@ export const cartInitialState = {
   itemsInCart: [],
 };
 
-export function cartReducer(state, { type, payload }) {
+export function cartReducer(state, { type, payload = {} }) {
   const { idDrink } = payload;
 
   let drinkInCart = state.itemsInCart.find((item) => item.idDrink === idDrink);
@@ -36,8 +36,8 @@ export function cartReducer(state, { type, payload }) {
       };
 
     case actionTypes.REMOVE_ONE_FROM_CART:
-      if (drinkInCart > 1) {
-        let cartUpdated = state.itemsInCart.forEach(item => {
+      if (drinkInCart.quantity > 1) {
+        let cartUpdated = state.itemsInCart.map(item => {
           if (item.idDrink === idDrink) {
             return {
               ...item,
@@ -51,7 +51,7 @@ export function cartReducer(state, { type, payload }) {
           itemsInCart: cartUpdated,
         };
       } else {
-        let cartUpdated = state.itemsInCart.filter(item => !item.idDrink === idDrink)
+        let cartUpdated = state.itemsInCart.filter(item => item.idDrink !== idDrink)
         return {
           ...state,
           itemsInCart: cartUpdated,
@@ -60,7 +60,7 @@ export function cartReducer(state, { type, payload }) {
 
     case actionTypes.REMOVE_ALL_FROM_CART:
       if (drinkInCart) {
-        let cartUpdated = state.cartItems.filter(item => !item.idRink === idDrink);
+        let cartUpdated = state.itemsInCart.filter(item => item.idDrink !== idDrink);
         return { ...state, itemsInCart: cartUpdated };
       };
 

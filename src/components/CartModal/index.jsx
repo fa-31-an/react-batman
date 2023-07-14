@@ -2,35 +2,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './CartModal.module.css'
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import useModal from '../../hooks/userModal';
+import useModal from '../../hooks/useModal';
+import useCart from '../../hooks/useCart';
+import ModalCard from './Components/Card';
 
 export default function CartModal() {
   const { isOpen, toggleModal } = useModal();
-  return (
+  const {
+    cart,
+    clearCart,
+    confirmPurchase,
+    purchaseTotal,
+  } = useCart();
+
+  if (isOpen) return (
     <div className={styles.modalBg}>
       <div className={styles.modal}>
-        <FontAwesomeIcon icon={faXmarkCircle} className={styles.icon} />
+        <FontAwesomeIcon icon={faXmarkCircle} className={styles.icon} onClick={toggleModal} />
         <h2>THE CART</h2>
         <section className={styles.modalBody}>
           <div className={styles.modalDrinksListContainer}>
-            <article className={styles.card}>
-              <img src='https://www.thecocktaildb.com/images/media/drink/tqxyxx1472719737.jpg' alt='' />
-              <span>NAME</span>
-              <span>CUÁNTO DUELE</span>
-              <div className={styles.counter}>
-                <button> - </button>
-                <span>N</span>
-                <button> + </button>
-              </div>
-              <FontAwesomeIcon icon={faTrash} className={styles.iconTrash} />
-            </article>
+            {cart.itemsInCart.length === 0 && (
+              <h3>Todavía no tienes productos en el carrito</h3>
+            )}
+            {cart.itemsInCart.map((drink) => (
+              <ModalCard key={drink.idDrink} drink={drink} />
+            ))}
           </div>
           <aside>
-            <p><strong>subtotal: xxxxx</strong></p>
-            <p>TOTAL</p>
+            <p><strong>subtotal: {purchaseTotal}</strong></p>
+            <p>TOTAL: xxxxx</p>
             <div className={styles.btnContainer}>
-              <button className={styles.clear}>Vaciar carrito</button>
-              <button className={styles.buy}>Confirmar compra</button>
+              <button className={styles.clear} onClick={clearCart}>Vaciar carrito</button>
+              <button className={styles.buy} onClick={confirmPurchase}>Confirmar compra</button>
             </div>
           </aside>
         </section>
